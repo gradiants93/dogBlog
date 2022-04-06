@@ -1,10 +1,12 @@
-import './App.css';
-import Students from './components/students';
+import "./App.css";
+
+import NavBar from "./components/navbar";
+import Students from "./components/students";
 
 function App() {
   return (
     <div className="App">
-      Hello from Techtonica!
+      <NavBar />
       <Students />
     </div>
   );
