@@ -1,97 +1,140 @@
 import { useState } from "react";
 
 const Form = (props) => {
-    // Initial student in case that you want to update a new student
-    const {initialStudent = {id: null, 
-                            firstname: "", 
-                            lastname: ""}} = props;
+  // Initial student in case that you want to update a new student
+  const {
+    initialPost = {
+      id: null,
+      title: "",
+      textcontent: "",
+      photourl: "",
+      alttext: "",
+      category: "",
+    },
+  } = props;
 
+  // We're using that initial student as our initial state
+  const [post, setPost] = useState(initialPost);
 
-    // We're using that initial student as our initial state                       
-    const [student, setStudent] = useState(initialStudent);
+  //create functions that handle the event of the user typing into the form
+  const handleTitleChange = (event) => {
+    const title = event.target.value;
+    setPost((post) => ({ ...post, title }));
+  };
 
-    //create functions that handle the event of the user typing into the form
-    const handleNameChange = (event) => {
-        const firstname = event.target.value;
-        setStudent((student) => ({ ...student, firstname }));
+  const handleTextChange = (event) => {
+    const textcontent = event.target.value;
+    setPost((post) => ({ ...post, textcontent }));
+  };
 
-    }
+  const handlePhotoChange = (event) => {
+    const photourl = event.target.value;
+    setPost((post) => ({ ...post, photourl }));
+  };
+  const handleAltTextChange = (event) => {
+    const alttext = event.target.value;
+    setPost((post) => ({ ...post, alttext }));
+  };
+  const handleCategoryChange = (event) => {
+    const category = event.target.value;
+    setPost((post) => ({ ...post, category }));
+  };
 
-    const handleLastnameChange = (event) => {
-        const lastname = event.target.value;
-        setStudent((student) => ({ ...student, lastname }));
-
-    }
-
-    //A function to handle the post request
-    const postStudent = (newStudent) => {
-        return fetch('/api/students', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'}, 
-        body: JSON.stringify(newStudent)
-      }).then((response) => {
-          return response.json()
-      }).then((data) => {
+  //A function to handle the post request
+  const postPost = (newPost) => {
+    return fetch("/api/posts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPost),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
         console.log("From the post ", data);
-        props.saveStudent(data);
-      
-    });
+        props.savePost(data);
+      });
+  };
+
+  //a function to handle the Update request
+  const updatePost = (existingPost) => {
+    return fetch(`/api/posts/${existingPost.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(existingPost),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log("From put request ", data);
+        props.savePost(data);
+      });
+  };
+
+  // Than handle submit function now needs the logic for the update scenario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (post.id) {
+      updatePost(post);
+    } else {
+      postPost(post);
     }
+  };
 
-    //a function to handle the Update request
-    const updateStudent = (existingStudent) =>{
-        return fetch(`/api/students/${existingStudent.id}`, {
-            method: 'PUT',
-            headers: {'Content-Type': 'application/json'}, 
-            body: JSON.stringify(existingStudent)
-          }).then((response) => {
-              return response.json()
-          }).then((data) => {
-            console.log("From put request ", data);
-            props.saveStudent(data);
-          
-        });
+  return (
+    <form onSubmit={handleSubmit}>
+      <fieldset>
+        <label>Title</label>
+        <input
+          type="text"
+          id="add-title"
+          placeholder="Title"
+          required
+          value={post.title}
+          onChange={handleTitleChange}
+        />
+        <label>Text Content</label>
+        <input
+          type="text"
+          id="add-text-content"
+          placeholder="Post body"
+          required
+          value={post.textcontent}
+          onChange={handleTextChange}
+        />
+        <label>Photo URL</label>
+        <input
+          type="text"
+          id="add-photo-url"
+          placeholder="Photo URL"
+          required
+          value={post.photourl}
+          onChange={handlePhotoChange}
+        />
+        <label>Photo Alt text</label>
+        <input
+          type="text"
+          id="add-alt-text"
+          placeholder="Alt text"
+          required
+          value={post.alttext}
+          onChange={handleAltTextChange}
+        />
+        <label>Category</label>
+        <input
+          type="text"
+          id="add-category"
+          placeholder="Post category"
+          required
+          value={post.category}
+          onChange={handleCategoryChange}
+        />
+      </fieldset>
 
-    }
-
-    // Than handle submit function now needs the logic for the update scenario 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if(student.id){
-            updateStudent(student);
-        } else {
-            postStudent(student);
-        } 
-        
-    };
-
-    return (
-        <form onSubmit={handleSubmit}>
-            <fieldset>
-                <label>First Name</label>
-                <input
-                    type="text"
-                    id="add-user-name"
-                    placeholder="First Name"
-                    required
-                    value={student.firstname}
-                    onChange={handleNameChange}
-
-                />
-                <label>Last Name</label>
-                <input
-                    type="text"
-                    id="add-user-lastname"
-                    placeholder="Last Name"
-                    required
-                    value={student.lastname}
-                    onChange={handleLastnameChange}
-                />
-            </fieldset>
-            
-            <button type="submit">{!student.id ? "Add" : "Save"}</button>
-        </form>
-    );
+      <button type="submit">{!post.id ? "Add" : "Save"}</button>
+    </form>
+  );
 };
 
 export default Form;
