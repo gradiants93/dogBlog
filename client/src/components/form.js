@@ -94,15 +94,17 @@ const Form = (props) => {
           value={post.title}
           onChange={handleTitleChange}
         />
-        <label>Text Content</label>
+        <></>
+        <label> Category</label>
         <input
           type="text"
-          id="add-text-content"
-          placeholder="Post body"
+          id="add-category"
+          placeholder="Post category"
           required
-          value={post.textcontent}
-          onChange={handleTextChange}
+          value={post.category}
+          onChange={handleCategoryChange}
         />
+        <br></br>
         <label>Photo URL</label>
         <input
           type="text"
@@ -121,14 +123,15 @@ const Form = (props) => {
           value={post.alttext}
           onChange={handleAltTextChange}
         />
-        <label>Category</label>
+        <br></br>
+        <label>Text Content</label>
         <input
           type="text"
-          id="add-category"
-          placeholder="Post category"
+          id="add-text-content"
+          placeholder="Post body"
           required
-          value={post.category}
-          onChange={handleCategoryChange}
+          value={post.textcontent}
+          onChange={handleTextChange}
         />
       </fieldset>
 

@@ -65,7 +65,15 @@ function EditPosts() {
   };
 
   return (
-    <div className="posts">
+    <div
+      className="posts"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <h2> Posts </h2>
       <ul>
         {posts.map((post) => {

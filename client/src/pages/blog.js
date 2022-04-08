@@ -16,22 +16,55 @@ const Blog = () => {
     loadPosts();
   }, []);
   return (
-    <>
-      <div className="blog">
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        className="blog"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          maxWidth: "540px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <h2>You can write your blog!</h2>
-        <ul>
-          {posts.map((post) => {
-            return (
-              <li key={post.id}>
-                {" "}
-                {post.title} {post.textcontent}
-                <img src={post.photourl} alt={post.alttext} />
-              </li>
-            );
-          })}
-        </ul>
+        <h4>
+          <small>RECENT POSTS</small>
+        </h4>
+        {posts.map((post) => {
+          return (
+            <article>
+              <hr></hr>
+              <h2>{post.tite}</h2>
+              <h5>
+                <span class="glyphicon glyphicon-time"></span> Posted on{" "}
+                {post.date}{" "}
+                <span class="label label-success">{post.category}</span>
+              </h5>
+              <div className="image">
+                <img
+                  src={post.photourl}
+                  alt={post.alttext}
+                  sizes="(max-width: 320px) 100vw, 320px"
+                />
+              </div>
+              <div>
+                <br />
+                <p>{post.textcontent}</p>
+              </div>
+              <hr></hr>
+            </article>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

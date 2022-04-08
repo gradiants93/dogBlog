@@ -9,7 +9,7 @@ import {
 
 export default function NavBar() {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" class="navbar">
       <Container>
         <Navbar.Brand href="#home">NavBar</Navbar.Brand>
         <Navbar.Collapse id="basic-navbar-nav">

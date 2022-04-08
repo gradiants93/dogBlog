@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: rgba(73, 242, 186, 0.824);
 }
 
 .App-logo {
@@ -37,6 +38,34 @@
   }
 }
 
-ul{
+ul {
   list-style: none;
+}
+.navbar {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+.label {
+  background-color: teal;
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+.glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: "Glyphicons Halflings";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
