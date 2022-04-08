@@ -16,6 +16,17 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
+});
+
+app.get("/blog", (req, res) => {
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
+});
+app.get("/edit", (req, res) => {
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
+});
+
 //create the get request
 app.get("/api/posts", cors(), async (req, res) => {
   try {
