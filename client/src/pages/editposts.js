@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Form from "./form";
+import Form from "../components/form";
 
-function Posts() {
+function EditPosts() {
   //Original state in the parent component so the page will now when to render new students
   const [posts, setPosts] = useState([]);
 
@@ -82,7 +82,7 @@ function Posts() {
                     onDelete(post);
                   }}
                 >
-                  X
+                  Delete
                 </button>
                 <button
                   type="button"
@@ -102,4 +102,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default EditPosts;
